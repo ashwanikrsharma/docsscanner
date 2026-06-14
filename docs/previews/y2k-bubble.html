@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PocketScan · Y2K Bubble preview</title>
+<style>
+  :root {
+    --bg: #fff5fb;
+    --ink: #2a1a3a;
+    --muted: #7a6b8a;
+    --pink: #FFB7E5;
+    --hot-pink: #FF6FBE;
+    --lilac: #D7B4FF;
+    --mint: #BFFCD9;
+    --chrome: linear-gradient(135deg, #f8f0ff, #fff, #d7eaff);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(800px 500px at 20% 0%, rgba(255,183,229,0.55), transparent 60%),
+      radial-gradient(700px 500px at 80% 100%, rgba(191,252,217,0.5), transparent 60%),
+      var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "DM Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    padding: 40px 24px 80px;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; }
+  .top { display:flex; align-items:baseline; justify-content:space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+  h1 {
+    margin: 0;
+    font-size: clamp(36px, 5vw, 56px);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: linear-gradient(120deg, var(--hot-pink), var(--lilac) 60%, #8DC8FF);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-weight: 800;
+  }
+  .back { color: var(--muted); text-decoration: none; font-size: 14px; }
+  .back:hover { color: var(--ink); }
+  .frames { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; }
+  .frame {
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 9/19.5;
+    border-radius: 44px;
+    background: #fff;
+    box-shadow: 0 30px 80px rgba(213,80,170,0.18), 0 0 0 6px #fff, 0 0 0 7px rgba(255,111,190,0.3);
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+  }
+  .frame::before {
+    content:"";
+    position: absolute;
+    top: 14px; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 28px;
+    background: #2a1a3a;
+    border-radius: 16px;
+    z-index: 3;
+  }
+  .screen {
+    position: absolute; inset: 0;
+    padding: 56px 20px 20px;
+    display: flex; flex-direction: column;
+    background: var(--bg);
+  }
+
+  /* Splash */
+  .splash {
+    background: linear-gradient(160deg, #FFE7F4 0%, #F0D9FF 40%, #DBFAEC 100%);
+    align-items: center; justify-content: center;
+    position: relative;
+  }
+  .splash::before {
+    content: "✦"; position: absolute; top: 22%; left: 18%; font-size: 20px; color: #FF6FBE; opacity: 0.7;
+  }
+  .splash::after {
+    content: "✦"; position: absolute; bottom: 25%; right: 20%; font-size: 16px; color: #8DC8FF;
+  }
+  .splash .logo {
+    width: 150px; height: 150px; border-radius: 50% / 45%;
+    background: linear-gradient(135deg, #FF6FBE 0%, #D7B4FF 50%, #BFFCD9 100%);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 20px 50px rgba(255,111,190,0.4), inset -8px -8px 20px rgba(255,255,255,0.4), inset 4px 4px 12px rgba(255,255,255,0.6);
+    animation: bounce 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+  }
+  @keyframes bounce {
+    from { transform: translateY(0) scale(1); }
+    to { transform: translateY(-8px) scale(1.04); }
+  }
+  .splash .wordmark {
+    margin-top: 28px;
+    font-size: 30px; font-weight: 800; letter-spacing: -0.02em; color: #C145A0;
+    text-shadow: 0 2px 0 #fff, 0 4px 12px rgba(255,111,190,0.4);
+  }
+  .splash .tag { color: #8a6c98; font-size: 13px; margin-top: 6px; }
+
+  /* Home */
+  .home .bar { display:flex; align-items:center; justify-content:space-between; padding: 0 4px 16px; }
+  .home .bar h2 {
+    margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.01em;
+    background: linear-gradient(120deg, var(--hot-pink), var(--lilac));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .home .shield {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: #fff; box-shadow: 0 2px 8px rgba(255,111,190,0.18), inset 0 0 0 1px rgba(255,111,190,0.2);
+    display:flex; align-items:center; justify-content:center; color: var(--hot-pink);
+  }
+  .home .hero { flex: 1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap: 14px; padding: 0 8px; }
+  .home .blob {
+    width: 110px; height: 110px;
+    background: linear-gradient(135deg, #FF6FBE, #D7B4FF 60%, #BFFCD9);
+    border-radius: 50% 45% 50% 45%;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 14px 40px rgba(255,111,190,0.35), inset -6px -6px 18px rgba(255,255,255,0.35);
+  }
+  .home h3 { margin: 12px 0 0; font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: #2a1a3a; }
+  .home .body { margin: 0; color: var(--muted); font-size: 14px; max-width: 28ch; }
+  .home .fab {
+    margin: 16px 0 4px;
+    padding: 14px 24px; border-radius: 999px;
+    background: linear-gradient(120deg, #FF6FBE, #D7B4FF);
+    color: #fff; font-weight: 700; font-size: 15px;
+    box-shadow: 0 12px 30px rgba(255,111,190,0.42), inset 0 -3px 0 rgba(193,69,160,0.3), inset 0 2px 0 rgba(255,255,255,0.4);
+    display:inline-flex; align-items:center; gap: 8px;
+  }
+
+  /* Privacy */
+  .privacy .pbar { display:flex; align-items:center; gap: 12px; padding: 0 4px 18px; color: var(--muted); }
+  .privacy .pbar h2 { margin:0; font-size: 20px; color: var(--ink); }
+  .privacy h3 {
+    margin: 0 0 6px; font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+    background: linear-gradient(120deg, var(--hot-pink), var(--lilac));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .privacy .lede { color: var(--muted); font-size: 13px; margin: 0 0 16px; }
+  .privacy .pcard {
+    background: #fff; border-radius: 20px; padding: 12px 14px; margin-bottom: 10px;
+    box-shadow: 0 6px 20px rgba(255,111,190,0.12), inset 0 0 0 1px rgba(255,111,190,0.1);
+    display:flex; gap: 10px; align-items:flex-start;
+  }
+  .privacy .ico {
+    width: 36px; height: 36px; border-radius: 50%; flex: 0 0 36px;
+    background: linear-gradient(135deg, #FFE7F4, #DBFAEC);
+    display:flex; align-items:center; justify-content:center; color: #C145A0;
+  }
+  .privacy h4 { margin: 0 0 2px; font-size: 14px; font-weight: 700; }
+  .privacy p { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+  .notes {
+    margin-top: 48px; padding: 24px; border-radius: 24px;
+    background: #fff; box-shadow: 0 12px 40px rgba(213,80,170,0.12);
+  }
+  .notes h2 { margin: 0 0 12px; font-size: 18px; }
+  .notes .row { display:grid; grid-template-columns: 140px 1fr; gap: 8px 16px; font-size: 14px; margin-bottom: 8px; }
+  .notes .row b { color: var(--muted); font-weight: 500; }
+  .swatches { display:flex; gap: 8px; margin-top: 8px; }
+  .sw { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>Y2K Bubble</h1>
+    <a class="back" href="index.html">← back to options</a>
+  </div>
+
+  <div class="frames">
+    <!-- Splash -->
+    <div class="frame">
+      <div class="screen splash">
+        <div class="logo">
+          <svg viewBox="0 0 64 64" width="72" height="72" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="18" width="24" height="28" rx="6" fill="#fff"/>
+            <rect x="24" y="24" width="16" height="2" rx="1" fill="#C145A0"/>
+            <rect x="24" y="29" width="16" height="2" rx="1" fill="#C145A0"/>
+            <rect x="24" y="34" width="11" height="2" rx="1" fill="#C145A0"/>
+            <circle cx="48" cy="20" r="3" fill="#fff" opacity="0.7"/>
+            <circle cx="16" cy="44" r="2" fill="#fff" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="wordmark">pocketscan</div>
+        <div class="tag">your docs, but make it cute ✦</div>
+      </div>
+    </div>
+
+    <!-- Home empty -->
+    <div class="frame">
+      <div class="screen home">
+        <div class="bar">
+          <h2>pocketscan</h2>
+          <div class="shield">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/></svg>
+          </div>
+        </div>
+        <div class="hero">
+          <div class="blob">
+            <svg viewBox="0 0 24 24" width="50" height="50"><rect x="7" y="4" width="10" height="16" rx="3" fill="#fff"/><rect x="9" y="8" width="6" height="1.6" rx="0.8" fill="#C145A0"/><rect x="9" y="11" width="6" height="1.6" rx="0.8" fill="#C145A0"/><rect x="9" y="14" width="4" height="1.6" rx="0.8" fill="#C145A0"/></svg>
+          </div>
+          <h3>nothing here yet ✦</h3>
+          <p class="body">tap the button. snap a page. it's literally that easy.</p>
+          <div class="fab">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M21 7V5a2 2 0 0 0-2-2h-2M3 17v2a2 2 0 0 0 2 2h2M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 12h10"/></svg>
+            scan a page
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacy -->
+    <div class="frame">
+      <div class="screen privacy">
+        <div class="pbar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <h2>privacy</h2>
+        </div>
+        <h3>your scans stay with you ✿</h3>
+        <p class="lede">no uploads. no tracking. just you and your files.</p>
+
+        <div class="pcard">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+          <div><h4>kept on your phone</h4><p>scans live in downloads/pocketscan. they're yours, forever.</p></div>
+        </div>
+        <div class="pcard">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><path d="M3 3l18 18"/></svg></div>
+          <div><h4>no cloud, no problem</h4><p>this app can't even reach the internet. peace of mind ✿</p></div>
+        </div>
+        <div class="pcard">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg></div>
+          <div><h4>zero tracking</h4><p>no analytics, no ads, no spying. promise.</p></div>
+        </div>
+        <div class="pcard">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4M12 2v13"/></svg></div>
+          <div><h4>you press share</h4><p>nothing leaves your phone unless you say so.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h2>Vibe notes</h2>
+    <div class="row"><b>palette</b><div>
+      <div class="swatches">
+        <div class="sw" style="background:#FF6FBE"></div>
+        <div class="sw" style="background:#D7B4FF"></div>
+        <div class="sw" style="background:#BFFCD9"></div>
+        <div class="sw" style="background:#8DC8FF"></div>
+        <div class="sw" style="background:#FFF5FB"></div>
+      </div>
+    </div></div>
+    <div class="row"><b>type</b><div>Friendly sans, 800 for hero, plenty of letter-spacing. Soft drop-shadows on display.</div></div>
+    <div class="row"><b>shape</b><div>Asymmetric blobs (50%/45% border radius), 20dp cards, sparkle accents ✦ ✿</div></div>
+    <div class="row"><b>motion</b><div>Splash icon bounces 8dp on a spring curve. Card press → soft squish (scale 0.96).</div></div>
+    <div class="row"><b>copy tone</b><div>Cute, casual, occasional sparkle emoji. "your docs, but make it cute"</div></div>
+    <div class="row"><b>mood</b><div>Sticker-pack productivity. Reads as scrapbook/journaling app energy.</div></div>
+  </div>
+</div>
+</body>
+</html>

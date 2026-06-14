@@ -1,0 +1,12 @@
+.DS_Store
+*.apk
+*.aab
+*.jks
+*.keystore
+pocketscan/build/
+pocketscan/app/build/
+pocketscan/.kotlin/
+pocketscan/local.properties
+pocketscan/keystore.properties
+pocketscan/signing/
+pocketscan/distribution/

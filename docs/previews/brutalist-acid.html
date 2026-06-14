@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PocketScan · Brutalist Acid preview</title>
+<style>
+  :root {
+    --bg: #f2f2ef;
+    --ink: #0a0a0a;
+    --muted: #555;
+    --acid: #C8FF00;
+    --border: #0a0a0a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-image:
+      linear-gradient(rgba(10,10,10,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10,10,10,0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: var(--ink);
+    font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    padding: 40px 24px 80px;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; }
+  .top { display:flex; align-items:flex-end; justify-content:space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+  h1 {
+    margin: 0;
+    font-size: clamp(40px, 6vw, 64px);
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  h1 .acid-bg { background: var(--acid); padding: 0 6px; box-shadow: 5px 5px 0 var(--ink); display: inline-block; }
+  .back { color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 700; border-bottom: 2px solid var(--ink); }
+  .frames { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; }
+  .frame {
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 9/19.5;
+    border-radius: 36px;
+    background: #fff;
+    border: 3px solid var(--border);
+    box-shadow: 10px 10px 0 var(--ink);
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+  }
+  .frame::before {
+    content:"";
+    position: absolute;
+    top: 14px; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 28px;
+    background: var(--ink);
+    border-radius: 16px;
+    z-index: 3;
+  }
+  .screen { position: absolute; inset: 0; padding: 56px 20px 20px; display:flex; flex-direction: column; background: #fff; }
+
+  /* Splash */
+  .splash {
+    background: var(--acid);
+    align-items: center; justify-content: center;
+    position: relative;
+  }
+  .splash::after {
+    content:""; position:absolute; inset:0; background:
+      repeating-linear-gradient(45deg, transparent 0 22px, rgba(10,10,10,0.04) 22px 23px);
+    pointer-events: none;
+  }
+  .splash .logo {
+    width: 156px; height: 156px;
+    background: var(--ink); border: 4px solid var(--ink);
+    border-radius: 18px;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 12px 12px 0 var(--ink);
+    position: relative;
+    z-index: 1;
+  }
+  .splash .wordmark {
+    margin-top: 32px;
+    font-size: 36px; font-weight: 900; letter-spacing: -0.04em; text-transform: uppercase;
+    color: var(--ink); position: relative; z-index: 1;
+  }
+  .splash .tag { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-top: 8px; color: var(--ink); position: relative; z-index: 1; }
+
+  /* Home */
+  .home .bar { display:flex; align-items:center; justify-content:space-between; padding: 0 0 18px; border-bottom: 3px solid var(--ink); margin-bottom: 16px; }
+  .home .bar h2 { margin: 0; font-size: 26px; font-weight: 900; letter-spacing: -0.02em; text-transform: uppercase; }
+  .home .shield {
+    width: 40px; height: 40px;
+    background: var(--acid); border: 2px solid var(--ink);
+    display:flex; align-items:center; justify-content:center; color: var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .home .hero {
+    flex: 1; display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
+    gap: 12px; padding: 0 4px;
+  }
+  .home .blob {
+    width: 110px; height: 110px;
+    background: var(--acid); border: 3px solid var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 8px 8px 0 var(--ink);
+    margin-bottom: 4px;
+  }
+  .home h3 {
+    margin: 8px 0 0; font-size: 32px; font-weight: 900; letter-spacing: -0.03em;
+    text-transform: uppercase; line-height: 0.95;
+  }
+  .home h3 .hl { background: var(--acid); padding: 0 4px; }
+  .home .body { margin: 0; color: var(--muted); font-size: 14px; max-width: 30ch; font-weight: 500; }
+  .home .fab {
+    margin: 18px 0 4px;
+    padding: 14px 22px;
+    background: var(--ink); color: var(--acid);
+    font-weight: 900; font-size: 16px; text-transform: uppercase; letter-spacing: 0.04em;
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--acid), 6px 6px 0 1px var(--ink);
+    display:inline-flex; align-items:center; gap: 10px;
+  }
+
+  /* Privacy */
+  .privacy .pbar { display:flex; align-items:center; gap: 14px; padding: 0 0 18px; border-bottom: 3px solid var(--ink); margin-bottom: 18px; }
+  .privacy .pbar h2 { margin:0; font-size: 22px; font-weight: 900; text-transform: uppercase; }
+  .privacy h3 { margin: 0 0 6px; font-size: 26px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
+  .privacy h3 .hl { background: var(--acid); padding: 0 4px; }
+  .privacy .lede { color: var(--muted); font-size: 13px; margin: 0 0 16px; font-weight: 500; }
+  .privacy .pcard {
+    background: #fff; border: 2px solid var(--ink); padding: 12px;
+    margin-bottom: 12px; display:flex; gap: 10px; align-items:flex-start;
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+  .privacy .pcard:nth-child(odd) { background: var(--acid); }
+  .privacy .ico {
+    width: 36px; height: 36px; flex: 0 0 36px;
+    background: var(--ink); color: var(--acid);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .privacy h4 { margin: 0 0 2px; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; }
+  .privacy p { margin: 0; font-size: 12px; color: var(--ink); line-height: 1.4; font-weight: 500; }
+
+  .notes {
+    margin-top: 48px; padding: 24px;
+    background: #fff; border: 3px solid var(--ink);
+    box-shadow: 10px 10px 0 var(--ink);
+  }
+  .notes h2 { margin: 0 0 12px; font-size: 18px; text-transform: uppercase; font-weight: 900; }
+  .notes .row { display:grid; grid-template-columns: 140px 1fr; gap: 8px 16px; font-size: 14px; margin-bottom: 8px; }
+  .notes .row b { color: var(--muted); font-weight: 700; text-transform: uppercase; font-size: 12px; }
+  .swatches { display:flex; gap: 8px; margin-top: 8px; }
+  .sw { width: 28px; height: 28px; border: 2px solid var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>BRUTALIST <span class="acid-bg">ACID</span></h1>
+    <a class="back" href="index.html">← back to options</a>
+  </div>
+
+  <div class="frames">
+    <!-- Splash -->
+    <div class="frame">
+      <div class="screen splash">
+        <div class="logo">
+          <svg viewBox="0 0 64 64" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+            <rect x="18" y="14" width="28" height="36" fill="#C8FF00" stroke="#fff" stroke-width="2"/>
+            <rect x="23" y="22" width="18" height="2.5" fill="#0a0a0a"/>
+            <rect x="23" y="28" width="18" height="2.5" fill="#0a0a0a"/>
+            <rect x="23" y="34" width="12" height="2.5" fill="#0a0a0a"/>
+          </svg>
+        </div>
+        <div class="wordmark">pocketscan</div>
+        <div class="tag">scan / keep / share</div>
+      </div>
+    </div>
+
+    <!-- Home empty -->
+    <div class="frame">
+      <div class="screen home">
+        <div class="bar">
+          <h2>POCKETSCAN</h2>
+          <div class="shield">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/></svg>
+          </div>
+        </div>
+        <div class="hero">
+          <div class="blob">
+            <svg viewBox="0 0 24 24" width="48" height="48"><rect x="7" y="4" width="10" height="16" fill="#0a0a0a"/><rect x="9" y="8" width="6" height="1.6" fill="#C8FF00"/><rect x="9" y="11" width="6" height="1.6" fill="#C8FF00"/><rect x="9" y="14" width="4" height="1.6" fill="#C8FF00"/></svg>
+          </div>
+          <h3>NO SCANS.<br/><span class="hl">YET.</span></h3>
+          <p class="body">Tap below. Capture a page. Done. Lives on your phone — full stop.</p>
+          <div class="fab">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8FF00" stroke-width="2.5" stroke-linecap="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M21 7V5a2 2 0 0 0-2-2h-2M3 17v2a2 2 0 0 0 2 2h2M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 12h10"/></svg>
+            SCAN
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacy -->
+    <div class="frame">
+      <div class="screen privacy">
+        <div class="pbar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <h2>PRIVACY</h2>
+        </div>
+        <h3>YOUR SCANS.<br/><span class="hl">YOUR RULES.</span></h3>
+        <p class="lede">No uploads. No tracking. Period.</p>
+
+        <div class="pcard">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="11"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+          <div><h4>ON DEVICE</h4><p>Saved to Downloads/PocketScan. Your files, your phone.</p></div>
+        </div>
+        <div class="pcard">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><path d="M3 3l18 18"/></svg></div>
+          <div><h4>NO CLOUD</h4><p>Can't send anything anywhere. No internet permission.</p></div>
+        </div>
+        <div class="pcard">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg></div>
+          <div><h4>NO TRACKING</h4><p>Zero analytics. Zero ads. Zero ad-tech.</p></div>
+        </div>
+        <div class="pcard">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4M12 2v13"/></svg></div>
+          <div><h4>YOU SHARE</h4><p>Nothing leaves the device unless you hit share.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h2>VIBE NOTES</h2>
+    <div class="row"><b>palette</b><div>
+      <div class="swatches">
+        <div class="sw" style="background:#0a0a0a"></div>
+        <div class="sw" style="background:#C8FF00"></div>
+        <div class="sw" style="background:#f2f2ef"></div>
+        <div class="sw" style="background:#fff"></div>
+      </div>
+    </div></div>
+    <div class="row"><b>type</b><div>Helvetica Neue / Inter, weight 900, UPPERCASE on display, tight tracking.</div></div>
+    <div class="row"><b>shape</b><div>Hard rectangles, 3px black borders, 6–12px offset shadows. No rounding on cards.</div></div>
+    <div class="row"><b>motion</b><div>Splash: black flash → acid pop. Buttons "stamp" on press (shadow collapses).</div></div>
+    <div class="row"><b>copy tone</b><div>Short, declarative, periods. "SCAN. KEEP. SHARE."</div></div>
+    <div class="row"><b>mood</b><div>Zine, streetwear, indie tool. Reads as opinionated, anti-corporate.</div></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "android-dev-fleet",
+  "displayName": "Android Dev Fleet",
+  "version": "0.1.0",
+  "description": "Spec, scaffold, build, test, run, and release Android apps — native Kotlin/Compose or Expo React Native. Manager orchestrates agents in parallel.",
+  "categories": ["mobile", "android", "scaffolding", "ci", "orchestration"],
+  "keywords": [
+    "android",
+    "kotlin",
+    "jetpack-compose",
+    "hilt",
+    "room",
+    "retrofit",
+    "expo",
+    "react-native",
+    "expo-router",
+    "nativewind",
+    "gradle",
+    "eas",
+    "emulator"
+  ],
+  "tracks": ["native-android", "expo-react-native"],
+  "entrypoint": ".claude-plugin/plugin.json"
+}

@@ -1,0 +1,43 @@
+{
+  "name": "android-dev-fleet",
+  "version": "0.1.0",
+  "description": "Fleet of skills, agents, and commands to spec, scaffold, build, test, run, and release Android apps across two tracks: native Kotlin/Jetpack Compose and React Native + Expo. Spec-first, parallel-by-default.",
+  "author": {
+    "name": "Ashwani Sharma",
+    "email": "ashwanikumar_sharma@intuit.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "android",
+    "kotlin",
+    "jetpack-compose",
+    "hilt",
+    "room",
+    "retrofit",
+    "expo",
+    "react-native",
+    "expo-router",
+    "nativewind",
+    "gradle",
+    "eas",
+    "emulator",
+    "orchestration"
+  ],
+  "skills": [
+    "skills/android-fleet-manager",
+    "skills/android-native-scaffold",
+    "skills/expo-android-scaffold",
+    "skills/android-compose-screen"
+  ],
+  "agents": [
+    "agents/android-fleet-manager.md",
+    "agents/android-spec-writer.md",
+    "agents/android-ci-agent.md",
+    "agents/android-emulator-agent.md"
+  ],
+  "commands": [
+    "commands/android-build.md",
+    "commands/android-new-feature.md",
+    "commands/android-release.md"
+  ]
+}

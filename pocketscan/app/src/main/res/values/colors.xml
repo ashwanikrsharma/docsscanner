@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Adaptive icon background — bubblegum pink, Y2K Bubble v2.0 -->
+    <color name="ic_launcher_background">#FFB7E5</color>
+    <!-- Splash screen background -->
+    <color name="splash_background">#FFF5F9</color>
+</resources>

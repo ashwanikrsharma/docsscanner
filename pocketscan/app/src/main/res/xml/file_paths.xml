@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!--
+        App-private filesDir paths still used for:
+          - thumbnails (we don't want page-0 bitmaps in user-visible Downloads)
+          - legacy fallback (we no longer write here, but FileProvider grants are still wired)
+    -->
+    <files-path
+        name="documents"
+        path="documents/" />
+    <files-path
+        name="thumbnails"
+        path="thumbnails/" />
+    <!--
+        Public external Downloads — exposed so we can share PDFs the app wrote via MediaStore
+        with FLAG_GRANT_READ_URI_PERMISSION. The actual MediaStore URI is what we share;
+        this path entry covers pre-Q legacy fallback writes.
+    -->
+    <external-path
+        name="downloads"
+        path="Download/" />
+</paths>
